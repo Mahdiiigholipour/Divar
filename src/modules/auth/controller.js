@@ -1,4 +1,4 @@
-const autoBind = require("autobind");
+const autoBind = require("auto-bind");
 const AuthService = require("./service");
 const AuthMessages = require("./messages");
 

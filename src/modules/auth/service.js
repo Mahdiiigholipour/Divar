@@ -1,4 +1,4 @@
-const autoBind = require("autobind");
+const autoBind = require("auto-bind");
 const UserModel = require("../user/model");
 const { randomInt } = require("crypto");
 const createHttpError = require("http-errors");
