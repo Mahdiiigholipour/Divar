@@ -11,7 +11,7 @@ async function main() {
   SwaggerConfig(app);
 
   app.listen(port, () => {
-    console.log(`server run on port ${port} : https://localhost:${port}`);
+    console.log(`server : https://127.0.0.1:${port}`);
   });
 }
 
