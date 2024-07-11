@@ -27,7 +27,7 @@
  *          -   Auth
  *      requestBody : 
  *          content : 
- *              application/x-www-urlencoded
+ *              application/x-www-urlencoded :
  *                  schema : 
  *                      $ref : "#components/schemas/SendOTP"
  *                      
