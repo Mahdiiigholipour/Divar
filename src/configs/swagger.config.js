@@ -7,7 +7,7 @@ function SwaggerConfig(app) {
       openapi: "3.0.1",
       info: {
         title: "Divar-Backend",
-        description: "Mahdi Gholipour",
+        description: "Mahdi sik",
         version: "1.0.0",
       },
     },
