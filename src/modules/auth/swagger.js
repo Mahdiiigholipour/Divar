@@ -7,28 +7,31 @@
 
 /**
  * @swagger
- *  components : 
- *      schemas : 
- *          SendOTP : 
+ *  components :
+ *      schemas :
+ *          SendOTP :
  *              type : object
- *              required : 
+ *              required :
  *                  -   mobile
- *              properties : 
- *                  mobile : 
+ *              properties :
+ *                  mobile :
  *                      type : string
  */
 
 /**
  * @swagger
  * /auth/send-otp :
- *  post :      
- *      summary : login with OTP 
- *      tags : 
+ *  post :
+ *      summary : login with OTP
+ *      tags :
  *          -   Auth
- *      requestBody : 
- *          content : 
- *              application/x-www-urlencoded :
- *                  schema : 
+ *      requestBody :
+ *          content :
+ *              application/x-www-form-urlencoded :
+ *                  schema :
  *                      $ref : "#components/schemas/SendOTP"
- *                      
+ *      responses :
+ *          200 :
+ *              description : success
+ *
  */
