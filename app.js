@@ -10,7 +10,7 @@ async function main() {
 
   
   app.listen(port, () => {
-    console.log(`server : https://localhost:${port}`);
+    console.log(`server : http://127.0.0.1:${port}`);
   });
 }
 
