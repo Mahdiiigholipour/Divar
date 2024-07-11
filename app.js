@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const SwaggerConfig = require("./src/configs/swagger.config");
 const mainRouter = require("./src/app.routes");
-const notFoundRoute = require("./src/common/exceptions/route-exceptions");
+const { notFoundRoute } = require("./src/common/exceptions/route-exceptions");
 const allExceptionsHandler = require("./src/common/exceptions/all-exceptions");
 dotenv.config();
 
