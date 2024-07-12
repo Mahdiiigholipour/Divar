@@ -27,6 +27,9 @@ class AuthService {
     if (code !== user?.OTP?.code)
       throw new createHttpError.Unauthorized(AuthMessages.incorrectOTPCode);
 
+    if (user.verifiedMobile === false) user.verifiedMobile = true;
+
+    await user.save();
     return user;
   }
   async logout() {}
