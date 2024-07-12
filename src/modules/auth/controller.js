@@ -22,8 +22,9 @@ class AuthController {
   async checkOTP(req, res, next) {
     try {
       const { mobile, code } = req.body;
-      await this.#service.checkOTP(mobile, code);
+      const token = await this.#service.checkOTP(mobile, code);
       return res.json({
+        token,
         message: AuthMessages.correctOTPCode,
       });
     } catch (error) {

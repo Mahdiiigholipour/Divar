@@ -3,6 +3,7 @@ const UserModel = require("../user/model");
 const { randomInt } = require("crypto");
 const createHttpError = require("http-errors");
 const AuthMessages = require("./messages");
+const JWT = require("jsonwebtoken");
 
 class AuthService {
   #model;
@@ -29,13 +30,18 @@ class AuthService {
 
     if (user.verifiedMobile === false) user.verifiedMobile = true;
 
+    const accessToken = this.#signToken({ mobile, id: user._id });
+
     await user.save();
-    return user;
+    return accessToken;
   }
   async logout() {}
 
   // private functions
-
+  //  checkOTP
+  #signToken(payload) {
+    return JWT.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: "1y" });
+  }
   async #checkExistByMobile(mobile) {
     const user = await this.#model.findOne({ mobile });
     if (!user) throw new createHttpError.NotFound(AuthMessages.userNotFound);
