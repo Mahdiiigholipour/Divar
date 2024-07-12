@@ -18,10 +18,26 @@ class AuthService {
     else return await this.#sendOTPForNewUser(mobile);
   }
 
-  async checkOTP(mobile, code) {}
+  async checkOTP(mobile, code) {
+    const user = await this.#checkExistByMobile(mobile);
+
+    if (user?.OTP?.expiresIn < new Date().getTime())
+      throw new createHttpError.Unauthorized(AuthMessages.OTPCodeExpired);
+
+    if (code !== user?.OTP?.code)
+      throw new createHttpError.Unauthorized(AuthMessages.incorrectOTPCode);
+
+    return user;
+  }
   async logout() {}
 
   // private functions
+
+  async #checkExistByMobile(mobile) {
+    const user = await this.#model.findOne({ mobile });
+    if (!user) throw new createHttpError.NotFound(AuthMessages.userNotFound);
+    return user;
+  }
 
   // sendOTP()
   async #sendOTPForNewUser(mobile) {
