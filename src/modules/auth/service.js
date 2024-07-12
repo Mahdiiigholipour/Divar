@@ -25,7 +25,7 @@ class AuthService {
 
   // sendOTP()
   async #sendOTPForNewUser(mobile) {
-    const newUser = await this.#model.create({ mobile });
+    let newUser = await this.#model.create({ mobile });
     newUser = await this.#generateOTPCode(newUser);
     await newUser.save();
     return newUser;
@@ -40,7 +40,7 @@ class AuthService {
   async #generateOTPCode(user) {
     const now = new Date().getTime();
 
-    if (user.OTP.code && user.OTP.expiresIn > now)
+    if (user?.OTP?.code && user?.OTP?.expiresIn > now)
       throw new createHttpError.BadRequest(AuthMessages.OTPCodeNotExpired);
 
     user.OTP = {

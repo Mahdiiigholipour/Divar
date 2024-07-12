@@ -16,8 +16,8 @@ async function main() {
   app.use(express.urlencoded({ extended: true }));
   SwaggerConfig(app);
   app.use(mainRouter);
-  allExceptionsHandler(app);
   notFoundRoute(app);
+  allExceptionsHandler(app);
 
   app.listen(port, () => {
     console.log(`server : http://127.0.0.1:${port}`);
