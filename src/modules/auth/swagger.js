@@ -59,4 +59,13 @@
  *          200 :
  *              description : success
  *
+ * /auth/logout :
+ *  get :
+ *      summary : user logout
+ *      tags :
+ *          -   Auth
+ *      responses :
+ *          200 :
+ *              description : success
+ *
  */
