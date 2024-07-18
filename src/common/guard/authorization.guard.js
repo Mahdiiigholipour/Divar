@@ -4,29 +4,33 @@ const jwt = require("jsonwebtoken");
 const UserModel = require("../../modules/user/model");
 
 async function verifyAccessToken(req, res, next) {
-  const token = req?.cookies?.access_token;
+  try {
+    const token = req?.cookies?.access_token;
 
-  if (!token)
-    throw new createHttpError.Unauthorized(AuthorizationMessages.login);
+    if (!token)
+      throw new createHttpError.Unauthorized(AuthorizationMessages.login);
 
-  const data = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const data = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-  if (typeof data === "object" && "id" in data) {
-    const user = await UserModel.findById(data.id, {
-      OTP: 0,
-      __v: 0,
-      updatedAt: 0,
-      verifiedMobile: 0,
-    }).lean();
+    if (typeof data === "object" && "id" in data) {
+      const user = await UserModel.findById(data.id, {
+        OTP: 0,
+        __v: 0,
+        updatedAt: 0,
+        verifiedMobile: 0,
+      }).lean();
 
-    if (!user)
-      throw new createHttpError.NotFound(AuthorizationMessages.notFound);
+      if (!user)
+        throw new createHttpError.NotFound(AuthorizationMessages.notFound);
 
-    req.user = user;
+      req.user = user;
 
-    return next();
+      return next();
+    }
+    throw new createHttpError.Unauthorized(AuthorizationMessages.invalidToken);
+  } catch (error) {
+    next(error);
   }
-  throw new createHttpError.Unauthorized(AuthorizationMessages.invalidToken);
 }
 
 module.exports = verifyAccessToken;
