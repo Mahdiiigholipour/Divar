@@ -11,12 +11,7 @@ class CategoryController {
 
   async createCategory(req, res, next) {
     try {
-      const categoryDto = ({
-        categoryName: name,
-        slug,
-        icon,
-        parent,
-      } = req.body);
+      const categoryDto = ({ categoryName, slug, icon, parent } = req.body);
       await this.#service.createCategory(categoryDto);
       return res.status(201).json({
         message: CategoryMessages.created,
