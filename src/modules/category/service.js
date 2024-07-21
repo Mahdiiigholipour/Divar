@@ -13,7 +13,8 @@ class CategoryService {
   }
 
   async createCategory(categoryDto) {
-    categoryDto.parents = await this.#parentProcesses(categoryDto?.parent);
+    categoryDto.parents =
+      (await this.#parentProcesses(categoryDto?.parent)) ?? [];
     categoryDto.slug = await this.#slugProcesses(categoryDto?.slug);
 
     const category = await this.#model.create(categoryDto);
@@ -32,19 +33,20 @@ class CategoryService {
 
   //createCategory functions
   async #parentProcesses(parent) {
-    if (!parent || !isValidObjectId(parent))
-      throw new createHttpError.BadRequest(CategoryMessages.parentIdProblem);
-
-    const parentCategory = await this.#checkExistById(parent);
-    const parents = [
-      ...new Set(
-        [parentCategory._id.toString()]
-          .concat(parentCategory?.parents.map((id) => id.toString()))
-          .map((id) => new Types.ObjectId(id))
-      ),
-    ];
-
-    return parents;
+    if (parent) {
+      if (isValidObjectId(parent)) {
+        const parentCategory = await this.#checkExistById(parent);
+        const parents = [
+          ...new Set(
+            [parentCategory._id.toString()]
+              .concat(parentCategory?.parents.map((id) => id.toString()))
+              .map((id) => new Types.ObjectId(id))
+          ),
+        ];
+        return parents;
+      }
+      throw new createHttpError.BadRequest(CategoryMessages.invalidParent);
+    }
   }
   async #slugProcesses(slug) {
     if (!slug) throw new createHttpError.BadRequest(CategoryMessages.emptySlug);

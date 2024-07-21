@@ -12,11 +12,11 @@
  *          CreateCategory :
  *              type : object
  *              required :
- *                  -   categoryName
+ *                  -   name
  *                  -   slug
  *                  -   icon
  *              properties :
- *                  categoryName :
+ *                  name :
  *                      type : string
  *                  slug :
  *                      type : string
