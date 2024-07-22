@@ -20,7 +20,9 @@ class CategoryService {
     const category = await this.#model.create(categoryDto);
     return category;
   }
-  async getCategories() {}
+  async getCategories() {
+    return await this.#model.find({ parent: { $exists: false } });
+  }
 
   //private functions
 
