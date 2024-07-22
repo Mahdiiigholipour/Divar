@@ -41,7 +41,7 @@
 
 /**
  * @swagger
- * /option
+ * /option :
  *  post :
  *      tags :
  *          -   Option
@@ -65,7 +65,7 @@
 
 /**
  * @swagger
- * /option/{categoryId}
+ * /option/{categoryId} :
  *  get :
  *      tags :
  *          -   Option
@@ -80,8 +80,8 @@
  */
 
 /**
- * @swagger
- * /option/{optionId}
+ * @swagger 
+ * /option/{optionId} :
  *  get :
  *      tags :
  *          -   Option
