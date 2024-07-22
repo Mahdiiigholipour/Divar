@@ -7,6 +7,10 @@ class OptionService {
     autoBind(this);
     this.#model = OptionModel;
   }
+
+  async create(optionDto){
+    
+  }
 }
 
 module.exports = new OptionService();
