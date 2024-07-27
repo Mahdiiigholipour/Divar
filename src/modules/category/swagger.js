@@ -54,3 +54,19 @@
  *              description : success
  *
  */
+
+/**
+ * @swagger
+ * /category/{categoryId} :
+ *  delete :
+ *      summary : deleting the desired category
+ *      tags :
+ *          -   Category
+ *      parameters :
+ *          -   in : path
+ *              name : categoryId
+ *              type : string
+ *      responses :
+ *          200 :
+ *              description : success
+ */
