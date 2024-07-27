@@ -25,6 +25,8 @@
  *                      type : string
  *                  guid :
  *                      type : string
+ *                  required :
+ *                      type : string
  *                  type :
  *                      type : string
  *                      enum :
