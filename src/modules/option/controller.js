@@ -56,6 +56,13 @@ class OptionController {
       next(error);
     }
   }
+  async remove(req, res, next) {
+    const { optionId } = req.params;
+    await this.#service.remove(optionId);
+    return res.json({
+      message: OptionMessages.deleted,
+    });
+  }
 }
 
 module.exports = new OptionController();

@@ -96,12 +96,24 @@
  */
 
 /**
- * @swagger 
+ * @swagger
  * /option/{optionId} :
  *  get :
  *      tags :
  *          -   Option
  *      summary : Getting the desired option
+ *      parameters :
+ *          -   in : path
+ *              name : optionId
+ *              type : string
+ *      responses :
+ *          200 :
+ *              description : success
+ *
+ *  delete :
+ *      tags :
+ *          -   Option
+ *      summary : Remove the desired option
  *      parameters :
  *          -   in : path
  *              name : optionId

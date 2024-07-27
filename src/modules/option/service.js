@@ -91,7 +91,18 @@ class OptionService {
     return options;
   }
 
+  async remove(id) {
+    await this.#checkExistById(id);
+    return await this.#model.deleteOne({ _id: id });
+  }
+
   //private functions
+
+  async #checkExistById(id) {
+    const option = await this.#model.findById(id);
+    if (!option) throw new createHttpError.NotFound(OptionMessages.notFound);
+    return option;
+  }
 
   // create method functions
   async #checkExistCategory(categoryId) {
