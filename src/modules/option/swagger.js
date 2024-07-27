@@ -80,6 +80,22 @@
  */
 
 /**
+ * @swagger
+ * /option/by-category-slug/{categorySlug} :
+ *  get :
+ *      tags :
+ *          -   Option
+ *      summary : Getting the desired category option
+ *      parameters :
+ *          -   in : path
+ *              name : categorySlug
+ *              type : string
+ *      responses :
+ *          200 :
+ *              description : success
+ */
+
+/**
  * @swagger 
  * /option/{optionId} :
  *  get :

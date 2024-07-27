@@ -51,6 +51,46 @@ class OptionService {
     return await this.#model.find({ category }, { __v: 0 });
   }
 
+  async getByCategorySlug(slug) {
+    const options = this.#model.aggregate([
+      {
+        $lookup: {
+          from: "categories",
+          localField: "category",
+          foreignField: "_id",
+          as: "category",
+        },
+      },
+      {
+        $unwind: "$category",
+      },
+      {
+        $addFields: {
+          categoryName: "$category.name",
+          categorySlug: "$category.slug",
+          categoryIcon: "$category.icon",
+        },
+      },
+      {
+        $project: {
+          category: 0,
+          __v: 0,
+
+          // "category.parent": 0,
+          // "category.parents": 0,
+          // "category._id": 0,
+          // __v: 0,
+        },
+      },
+      {
+        $match: {
+          categorySlug: slug,
+        },
+      },
+    ]);
+    return options;
+  }
+
   //private functions
 
   // create method functions

@@ -47,6 +47,15 @@ class OptionController {
       next(error);
     }
   }
+  async getByCategorySlug(req, res, next) {
+    try {
+      const { categorySlug } = req.params;
+      const options = await this.#service.getByCategorySlug(categorySlug);
+      return res.json(options);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = new OptionController();
