@@ -23,22 +23,30 @@ class OptionController {
 
   async getAll(req, res, next) {
     try {
+      const options = await this.#service.getAll();
+      return res.json(options);
     } catch (error) {
       next(error);
     }
   }
   async getById(req, res, next) {
     try {
+      const { optionId } = req.params;
+      const option = await this.#service.getById(optionId);
+      return res.json(option);
     } catch (error) {
       next(error);
     }
   }
   async getByCategory(req, res, next) {
     try {
+      const { categoryId } = req.params;
+      const options = await this.#service.getByCategory(categoryId);
+      return res.json(options);
     } catch (error) {
       next(error);
     }
   }
 }
 
-module.exports = new OptionService();
+module.exports = new OptionController();

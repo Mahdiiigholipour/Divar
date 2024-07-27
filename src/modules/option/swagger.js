@@ -65,7 +65,7 @@
 
 /**
  * @swagger
- * /option/{categoryId} :
+ * /option/by-category/{categoryId} :
  *  get :
  *      tags :
  *          -   Option

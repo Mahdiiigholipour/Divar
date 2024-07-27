@@ -31,6 +31,25 @@ class OptionService {
     const option = await this.#model.create(optionDto);
     return option;
   }
+  async getAll() {
+    const options = await this.#model
+      .find({}, { __v: 0 }, { sort: { _id: -1 } })
+      .populate([{ path: "category", select: { name: 1, slug: 1 } }]);
+
+    return options;
+  }
+
+  async getById(id) {
+    const option = await this.#model
+      .findById(id, { __v: 0 })
+      .populate([{ path: "category", select: { name: 1, slug: 1 } }]);
+    if (!option) throw new createHttpError.NotFound(OptionMessages.notFound);
+    return option;
+  }
+
+  async getByCategory(category) {
+    return await this.#model.find({ category }, { __v: 0 });
+  }
 
   //private functions
 
