@@ -10,8 +10,8 @@ class OptionController {
 
   async create(req, res, next) {
     try {
-      const { title, key, type, enum: foo, guid, category } = req.body;
-      const optionDto = { title, key, type, foo, guid, category };
+      const { title, key, type, enum: list, guid, category } = req.body;
+      const optionDto = { title, key, type, enum: list, guid, category };
 
       await this.#service.create(optionDto);
 
