@@ -79,6 +79,35 @@ class OptionController {
       message: OptionMessages.deleted,
     });
   }
+  async update(req, res, next) {
+    try {
+      const { optionId } = req.params;
+      const {
+        title,
+        key,
+        type,
+        enum: list,
+        guid,
+        category,
+        required,
+      } = req.body;
+
+      const optionDto = {
+        title,
+        key,
+        type,
+        enum: list,
+        guid,
+        category,
+        required,
+      };
+
+      const option = await this.#service.update(optionId, optionDto);
+      return res.json({ message: OptionMessages.updated });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = new OptionController();

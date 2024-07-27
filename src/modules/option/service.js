@@ -96,6 +96,45 @@ class OptionService {
     return await this.#model.deleteOne({ _id: id });
   }
 
+  async update(id, optionDto) {
+    const option = await this.#checkExistById(id);
+
+    // category section
+    if (optionDto?.category) {
+      const category = await this.#checkExistCategory(optionDto?.category);
+      optionDto.category = category._id;
+    } else optionDto.category = option.category;
+
+    //key section
+    if (optionDto?.key)
+      optionDto.key = slugify(optionDto?.key, {
+        trim: true,
+        replacement: "_",
+        lower: true,
+      });
+    else optionDto.key = option.key;
+    await this.#checkKeyConflict(optionDto.key, optionDto.category);
+
+    //enum section
+    if (optionDto?.enum)
+      optionDto.enum = await this.#enumProcesses(optionDto.enum);
+    else optionDto.enum = option.enum;
+
+    //other fields
+    for (const key in optionDto) {
+      if (["title", "guid", "required", "type"].includes(key)) {
+        if (!optionDto[key]) delete optionDto[key];
+      }
+    }
+
+    const updatedOption = await this.#model.updateOne(
+      { _id: id },
+      { $set: optionDto }
+    );
+
+    return updatedOption;
+  }
+
   //private functions
 
   async #checkExistById(id) {

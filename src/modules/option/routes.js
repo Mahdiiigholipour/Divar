@@ -8,6 +8,7 @@ router.get(
   OptionController.getByCategorySlug
 );
 router.get("/:optionId", OptionController.getById);
+router.put("/:optionId", OptionController.update);
 router.delete("/:optionId", OptionController.remove);
 module.exports = {
   OptionRoutes: router,
