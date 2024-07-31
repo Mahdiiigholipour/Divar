@@ -9,4 +9,8 @@ mainRouter.use("/user", UserRoutes);
 mainRouter.use("/category", CategoryRoutes);
 mainRouter.use("/option", OptionRoutes);
 
+mainRouter.get("/", (req, res) => {
+  res.render("./pages/index.js");
+});
+
 module.exports = mainRouter;
