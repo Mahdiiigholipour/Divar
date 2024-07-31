@@ -18,12 +18,12 @@ async function main() {
   app.use(express.urlencoded({ extended: true }));
 
   app.use(cookieParser(process.env.COOKIE_SECRET_KEY));
-  
+
   //ejs configs
-  app.use(express.static("public"))
+  app.use(express.static("public"));
   app.use(expressEjsLayouts);
-  app.set("view engine","ejs")
-  app.set("layout","./layouts/panel/main.ejs")
+  app.set("view engine", "ejs");
+  app.set("layout", "./layouts/panel/main.ejs");
 
   SwaggerConfig(app);
   app.use(mainRouter);
